@@ -1,5 +1,5 @@
 import React from "react";
-
+import coverImage from "../assets/cover.jpg";
 const projectsData = [
   {
     img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
@@ -10,7 +10,7 @@ const projectsData = [
     linkText: "🔒 Internal Project",
   },
   {
-    img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop",
+    img: "https://kimi-web-img.kimi.ai/img/static.vecteezy.com/dbfeb01212a407341dd03d4b311432f1abbb3a7b.jpg",
     cat: "YouTube & Social Media Marketing",
     title: "Killer Kahaaniyan",
     desc: "Managed YouTube and social media content for a storytelling-focused channel. Designed engaging YouTube thumbnails and Instagram/Facebook reel covers using Canva. Edited and optimized short-form and video content using Clipchamp, while creating SEO-optimized titles, descriptions, and tags to improve discoverability and engagement.",
@@ -18,20 +18,20 @@ const projectsData = [
     linkText: "▶️ YouTube",
   },
   {
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop",
+    img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&h=400&fit=crop",
     cat: "Outreach & Guest Posting",
     title: "Craft.Camp",
     desc: "Executed outreach campaigns for guest posting and backlink acquisition. Coordinated with publishers and maintained outreach databases for sustained link-building in the DIY/building niche.",
-    link: "https://craft.camp/",
-    linkText: "🔗 Visit Site",
+    link: "#",
+    linkText: "🔒 Internal Project",
   },
   {
     img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop",
     cat: "Backlinks & Outreach",
     title: "SmallHousePlan.com",
     desc: "Conducted outreach for backlink opportunities and guest posting. Managed outreach tracking and supported off-page SEO initiatives for the small house plans and architecture niche.",
-    link: "https://smallhouseplan.com/",
-    linkText: "🔗 Visit Site",
+    link: "#",
+    linkText: "🔒 Internal Project",
   },
   {
     img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop",
@@ -40,6 +40,14 @@ const projectsData = [
     desc: "Leveraged Claude AI to generate 50+ SEO-optimized blog posts per month. Built automated workflows for keyword clustering, content outline generation, full article writing, and internal linking. Reduced content production time by 80% while maintaining quality and search intent alignment.",
     link: "#",
     linkText: "🔒 Internal Project",
+  },
+  {
+    img: coverImage,
+    cat: "Personal Brand & Content",
+    title: "The Peak Content",
+    desc: "Personal Instagram brand focused on content creation, digital marketing insights, and growth strategies. Creating engaging reels, carousels, and educational content around SEO, AI tools, and marketing automation.",
+    link: "https://www.instagram.com/the_peak_content/",
+    linkText: "📸 Instagram",
   },
 ];
 
