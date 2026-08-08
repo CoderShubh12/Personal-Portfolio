@@ -43,9 +43,9 @@ const projectsData = [
   },
   {
     img: coverImage,
-    cat: "Personal Brand & Content",
+    cat: "News & Current Affairs",
     title: "The Peak Content",
-    desc: "Personal Instagram brand focused on content creation, digital marketing insights, and growth strategies. Creating engaging reels, carousels, and educational content around SEO, AI tools, and marketing automation.",
+    desc: "Instagram news and current affairs brand delivering daily updates on politics, global events, trending topics, and social issues. Creating fast-paced reels, informative carousels, and bite-sized news content optimized for maximum reach and engagement.",
     link: "https://www.instagram.com/the_peak_content/",
     linkText: "📸 Instagram",
   },
