@@ -15,6 +15,7 @@ const Navbar = () => {
         <li onClick={() => scrollToId("about")}>About</li>
         <li onClick={() => scrollToId("skills")}>Skills</li>
         <li onClick={() => scrollToId("projects")}>Projects</li>
+        <li onClick={() => scrollToId("case-studies")}>Case Studies</li>
         <li onClick={() => scrollToId("experience")}>Experience</li>
         <li onClick={() => scrollToId("contact")}>Contact</li>
       </ul>

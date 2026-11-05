@@ -11,7 +11,7 @@ const Contact = () => {
   return (
     <section className="section" id="contact">
       <div className="section-header">
-        <h2><span className="num">05</span> Contact</h2>
+        <h2><span className="num">07</span> Contact</h2>
         <div className="line"></div>
       </div>
       <div className="contact-grid">
