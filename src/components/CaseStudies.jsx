@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import terminalShot from "../assets/signal-desk-terminal.png";
+import kkYt from "../assets/kk-youtube-analytics.png";
+import kkIg from "../assets/kk-instagram-insights.png";
+import kkFb from "../assets/kk-facebook-insights.png";
 
 /* =========================================================
    CASE STUDIES
@@ -36,29 +40,30 @@ const caseStudiesData = [
   {
     cat: "FinTech · AI + Technical Analysis",
     title: "Signal Desk: AI Intraday Trading Terminal",
+    shot: terminalShot,
+    shotAlt: "Signal Desk intraday trading terminal showing a live chart, signals and alerts",
     tagline:
-      "A full-stack terminal that reads the chart and the news at the same time, and turns both into one intraday signal.",
+      "A live intraday trading terminal for the Indian market that puts the chart, signals and alerts on one screen.",
     metrics: [
-      { value: "6", label: "Technical indicators" },
-      { value: "2", label: "Markets: NSE & US" },
-      { value: "3", label: "Timeframes: 5m · 15m · 1h" },
+      { value: "Live", label: "NSE market view" },
+      { value: "1", label: "Screen for chart, signals & alerts" },
+      { value: "Paper", label: "Practice trading only" },
     ],
     challenge:
-      "Intraday traders switch between charting tools, indicator panels and news sites, and still have to judge in their heads how today's headlines change the technical picture. I wanted one screen that did both.",
+      "Intraday traders jump between charting tools, signal panels and alert feeds, which slows decisions and makes it easy to miss a move. I wanted one clear screen that shows what is happening in the market right now.",
     approach: [
-      "Built the terminal in Next.js 14 and TypeScript with reusable chart, gauge and indicator components.",
-      "Pulled live OHLCV data from the Twelve Data API for NSE and US stocks, with CSV upload as a fallback.",
-      "Wrote the indicator engine from scratch: EMA 9/21, RSI 14, MACD, session VWAP, opening-range breakout and volume.",
-      "Combined them into a weighted technical score (VWAP 25%, trend 20%, MACD 20%, RSI 15%, ORB 10%, volume 10%).",
-      "Used the Claude API with web search to find same-day catalysts and score news sentiment from −100 to +100, prioritizing Indian financial sources for NSE stocks.",
-      "Blended technical and news scores with an adjustable weighting, and added a live NSE/US market-hours status.",
+      "Designed and built the whole product myself, from idea to a working live terminal.",
+      "Focused on a clean, dark, easy-to-scan layout so the important information is visible at a glance.",
+      "Combined a live chart, trade signals and instant alerts in one place.",
+      "Added a paper-trading mode so ideas can be practised and reviewed without risking real money.",
+      "Kept the tool transparent and clearly labelled as a research aid, not financial advice.",
     ],
     results: [
-      "One screen that shows price action, indicator health and news sentiment together.",
-      "A clear, explainable signal score instead of a black box.",
-      "Built with a clear \"not financial advice\" disclaimer and a transparent, rule-based method.",
+      "One working screen for chart, signals and alerts instead of several tabs.",
+      "A practice environment to review decisions safely.",
+      "Built as a personal, in-progress product, with no profit or accuracy claims.",
     ],
-    tools: ["Claude API", "Next.js", "TypeScript", "React", "Twelve Data API"],
+    tools: ["Product Design", "Full-Stack Build", "NSE Markets", "Paper Trading"],
   },
   {
     cat: "AI Automation · Off-Page SEO",
@@ -115,6 +120,11 @@ const caseStudiesData = [
   {
     cat: "YouTube & Social Media",
     title: "Killer Kahaaniyan",
+    shots: [
+      { src: kkYt, alt: "YouTube Studio analytics for the last 28 days: 119.8K views, 13.7K watch hours, +1.4K subscribers", caption: "YouTube Studio · 28 Apr – 25 May 2026" },
+      { src: kkIg, alt: "Instagram insights for the last 28 days: 73.3K views, 48.9K reach", caption: "Instagram Insights · 28 Apr – 25 May 2026" },
+      { src: kkFb, alt: "Facebook insights for the last 28 days: 92.2K views, 73.8K viewers", caption: "Facebook Insights · 28 Apr – 25 May 2026" },
+    ],
     tagline:
       "Growing a Hindi true-crime brand in a niche where blood, violence and real faces get videos restricted, with policy-safe creatives and well-timed Meta ads.",
     metrics: [
@@ -134,6 +144,7 @@ const caseStudiesData = [
     ],
     results: [
       "YouTube: 12,957 subscribers, +1,391 in 28 days, with 119.8K views and 13.7K watch hours.",
+      "Channel page today (public): 14.6K subscribers and 376 videos.",
       "Shorts reaching up to 84% average viewed, and new uploads beating the channel's usual views.",
       "Instagram: 73.3K views, 48.9K reach and 3.2K new followers in 28 days; interactions up 59.5% and organic views up 51.9% alongside boosted reels.",
       "Facebook: 92.2K views from 73.8K viewers; interactions up 157.8%.",
@@ -168,6 +179,70 @@ const caseStudiesData = [
     tools: ["Ahrefs", "SEMrush", "Google Sheets", "Gmail"],
   },
 ];
+
+/* Screenshot carousel: arrows, dots, swipe and arrow keys. */
+const ShotCarousel = ({ shots }) => {
+  const [i, setI] = useState(0);
+  const startX = useRef(null);
+  const n = shots.length;
+  const go = (k) => setI((k + n) % n);
+
+  const onKeyDown = (e) => {
+    if (n < 2) return;
+    if (e.key === "ArrowRight") { e.preventDefault(); go(i + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(i - 1); }
+  };
+  const onTouchStart = (e) => { startX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (startX.current === null) return;
+    const dx = e.changedTouches[0].clientX - startX.current;
+    startX.current = null;
+    if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1);
+  };
+
+  return (
+    <div
+      className="shot-carousel"
+      role="group"
+      aria-roledescription="carousel"
+      aria-label="Screenshots"
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+    >
+      <div className="shot-viewport" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        <div className="shot-track" style={{ transform: `translateX(-${i * 100}%)` }}>
+          {shots.map((sh, k) => (
+            <figure className="shot-slide" key={k} aria-hidden={k !== i}>
+              <img src={sh.src} alt={sh.alt} loading="lazy" draggable="false" />
+            </figure>
+          ))}
+        </div>
+        {n > 1 && (
+          <>
+            <button type="button" className="shot-arrow prev" onClick={() => go(i - 1)} aria-label="Previous screenshot">‹</button>
+            <button type="button" className="shot-arrow next" onClick={() => go(i + 1)} aria-label="Next screenshot">›</button>
+          </>
+        )}
+      </div>
+      <div className="shot-meta">
+        <span className="shot-caption">{shots[i].caption}</span>
+        {n > 1 && (
+          <div className="shot-dots">
+            {shots.map((_, k) => (
+              <button
+                type="button"
+                key={k}
+                className={k === i ? "active" : ""}
+                onClick={() => go(k)}
+                aria-label={`Show screenshot ${k + 1} of ${n}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const CaseStudyCard = ({ study, index }) => {
   const [open, setOpen] = useState(false);
@@ -248,6 +323,16 @@ const CaseStudyCard = ({ study, index }) => {
 
       {open && (
         <div className="case-details">
+          {(study.shots || study.shot) && (
+            <ShotCarousel
+              shots={
+                study.shots || [
+                  { src: study.shot, alt: study.shotAlt || study.title, caption: study.shotCaption || "Screenshot of the live terminal" },
+                ]
+              }
+            />
+          )}
+
           <div className="case-block">
             <h4>
               <span className="case-dot challenge"></span>The Challenge
